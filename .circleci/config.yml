@@ -9,7 +9,12 @@ jobs: # a collection of steps
       - checkout # special step to check out source code to working directory
       - run:
           name: update-npm
-          command: 'sudo npm install -g npm@latest'
+          command: |
+            'sudo npm install -g npm@latest'
+            'sudo apt-get install -y libappindicator1 fonts-liberation'
+            'sudo apt-get install -y dpkg'
+            'wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+            'sudo dpkg -i google-chrome*.deb'
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -20,6 +25,10 @@ jobs: # a collection of steps
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run: # run tests
-          name: test
-          command: npm test
+      - run:
+          name: prepare environment and run tests
+          command: |
+            export CHROME_BIN=/usr/bin/google-chrome
+            export DISPLAY=:99.0
+            sh -e /etc/init.d/xvfb start
+            npm test
