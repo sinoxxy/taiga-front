@@ -14,8 +14,8 @@ jobs: # a collection of steps
             sudo apt-get install -y libappindicator1 fonts-liberation
             sudo apt-get install -y dpkg
             # sudo apt-get install -y rubygems build-essential 
-            sudo apt-get install -y ruby=4.9
-            sudo apt-get install -y ruby-all-dev
+            sudo apt-get install -y ruby
+            #sudo apt-get install -y ruby-all-dev
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo apt-get install -y ./google-chrome*.deb
       - restore_cache: # special step to restore the dependency cache
@@ -25,7 +25,7 @@ jobs: # a collection of steps
           name: install gem dependencies
           command: |
             gem install --user-install sass scss_lint rake
-            export PATH="~/.gem/ruby/2.3.0/bin:$PATH"
+            export PATH="~/.gem/ruby/*/bin:$PATH"
             sass -v
       - run:
           name: install-npm-deps
