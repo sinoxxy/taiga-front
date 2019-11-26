@@ -25,9 +25,9 @@ jobs: # a collection of steps
       - run: 
           name: install gem dependencies
           command: |
+            export PATH="~/.gem/ruby/2.3.0/bin:$PATH"
             sudo apt-get install ruby-dev bundler
-            gem install --user-install sass scss_lint rake
-            export PATH="~/.gem/ruby/*/bin:$PATH"
+            gem install --user-install sass rake # scss_lint rake
             sass -v
       - run:
           name: install-npm-deps
