@@ -13,6 +13,7 @@ jobs: # a collection of steps
             sudo npm install -g npm@latest
             sudo apt-get install -y libappindicator1 fonts-liberation
             sudo apt-get install -y dpkg
+            sudo apt-get install -y gem 
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo apt-get install -y ./google-chrome*.deb
       - restore_cache: # special step to restore the dependency cache
@@ -21,9 +22,9 @@ jobs: # a collection of steps
       - run: 
           name: install gem dependencies
           command: |
-          gem install sass scss-lint
-          export PATH="~/.gem/ruby/2.1.0/bin:$PATH"
-          sass -v
+            gem install sass scss-lint
+            export PATH="~/.gem/ruby/2.1.0/bin:$PATH"
+            sass -v
       - run:
           name: install-npm-deps
           command: npm install
