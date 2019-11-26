@@ -5,6 +5,7 @@ jobs: # a collection of steps
     docker: # run the steps with Docker
       - image: circleci/node:10.16.3 # ...with this image as the primary container; this is where all `steps` will run
       - image: mongo:4.2.0 # and this image as the secondary service container
+      - image:stretch
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
@@ -14,7 +15,7 @@ jobs: # a collection of steps
             sudo apt-get install -y libappindicator1 fonts-liberation
             sudo apt-get install -y dpkg
             # sudo apt-get install -y rubygems build-essential 
-            sudo apt-get install -y ruby
+            #sudo apt-get install -y ruby
             #sudo apt-get install -y ruby-all-dev
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo apt-get install -y ./google-chrome*.deb
