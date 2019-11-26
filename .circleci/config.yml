@@ -23,8 +23,7 @@ jobs: # a collection of steps
           name: install gem dependencies
           command: |
             sudo gem install sass scss-lint rake
-            export PATH="~/.gem/ruby/2.1.0/bin:/var/lib/gems/2.3.0/gems/rainbow-2.2.2/ext
-:$PATH"
+            export PATH="~/.gem/ruby/2.1.0/bin:/var/lib/gems/2.3.0/gems/rainbow-2.2.2/ext:$PATH"
             sass -v
       - run:
           name: install-npm-deps
